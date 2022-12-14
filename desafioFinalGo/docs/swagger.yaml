@@ -1,0 +1,638 @@
+definitions:
+  domain.Consulta:
+    properties:
+      data:
+        type: string
+      dentista:
+        $ref: '#/definitions/domain.Dentista'
+      dentista_id:
+        type: integer
+      descricao:
+        type: string
+      hora:
+        type: string
+      id:
+        type: integer
+      paciente:
+        $ref: '#/definitions/domain.Paciente'
+      paciente_id:
+        type: integer
+    type: object
+  domain.ConsultaDTO:
+    properties:
+      data:
+        type: string
+      dentista:
+        $ref: '#/definitions/domain.Dentista'
+      dentista_id:
+        type: integer
+      descricao:
+        type: string
+      hora:
+        type: string
+      id:
+        type: integer
+      paciente:
+        $ref: '#/definitions/domain.Paciente'
+      paciente_id:
+        type: integer
+    type: object
+  domain.Dentista:
+    properties:
+      id:
+        type: integer
+      matricula:
+        type: integer
+      nome:
+        type: string
+      sobrenome:
+        type: string
+    type: object
+  domain.Paciente:
+    properties:
+      data_cadastro:
+        type: string
+      id:
+        type: integer
+      nome:
+        type: string
+      rg:
+        type: integer
+      sorenome:
+        type: string
+    type: object
+  web.errorResponse:
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+      status:
+        type: integer
+    type: object
+info:
+  contact:
+    name: Public APIs
+    url: https://dev.publicapis.ml
+  description: This API handle products from our store
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://publicapis.ml/terms
+  title: Store API
+  version: "1.0"
+paths:
+  /consultas:
+    post:
+      consumes:
+      - application/json
+      description: Post a consult
+      parameters:
+      - description: Consulta
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/domain.Consulta'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Consulta'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Post a consult
+      tags:
+      - CRUD CONSULTAS
+  /consultas/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a consult by ID
+      parameters:
+      - description: Consulta ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Consulta'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Delete a consult by ID
+      tags:
+      - CRUD CONSULTAS
+    get:
+      consumes:
+      - application/json
+      description: Get a consult by id
+      parameters:
+      - description: Consulta id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Consulta'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Get a consult by id
+      tags:
+      - CRUD CONSULTAS
+    patch:
+      consumes:
+      - application/json
+      description: Patch a consult
+      parameters:
+      - description: Consulta ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Consulta
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/domain.Consulta'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Consulta'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Patch a consult
+      tags:
+      - CRUD CONSULTAS
+    put:
+      consumes:
+      - application/json
+      description: Put a consult
+      parameters:
+      - description: Consulta ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Consulta
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/domain.Consulta'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Consulta'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Put a consult
+      tags:
+      - CRUD CONSULTAS
+  /consultas/consulta_paciente/{rg}:
+    get:
+      consumes:
+      - application/json
+      description: Get a consult by rg
+      parameters:
+      - description: Consulta RG
+        in: path
+        name: rg
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.ConsultaDTO'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Get a consult by rg
+      tags:
+      - CRUD CONSULTAS
+  /dentistas:
+    get:
+      consumes:
+      - application/json
+      description: getall dentistas
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Dentista'
+      summary: List dentistas
+      tags:
+      - CRUD DENTISTAS
+    post:
+      consumes:
+      - application/json
+      description: Post a dentist
+      parameters:
+      - description: Dentista
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/domain.Dentista'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Dentista'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Post a dentist
+      tags:
+      - CRUD DENTISTAS
+  /dentistas/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a dentist by ID
+      parameters:
+      - description: Dentista ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Dentista'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Delete a dentist by ID
+      tags:
+      - CRUD DENTISTAS
+    get:
+      consumes:
+      - application/json
+      description: Get a dentist by ID
+      parameters:
+      - description: Dentista ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Dentista'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Get a dentista by ID
+      tags:
+      - CRUD DENTISTAS
+    patch:
+      consumes:
+      - application/json
+      description: Patch a dentist
+      parameters:
+      - description: Dentista ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Dentista
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/domain.Dentista'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Dentista'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Patch a dentist
+      tags:
+      - CRUD DENTISTAS
+    put:
+      consumes:
+      - application/json
+      description: Put a dentist
+      parameters:
+      - description: Dentista ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Dentista
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/domain.Dentista'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Dentista'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Put a dentist
+      tags:
+      - CRUD DENTISTAS
+  /pacientes:
+    get:
+      consumes:
+      - application/json
+      description: get pacientes
+      parameters:
+      - description: SECRET_TOKEN
+        in: header
+        name: SECRET_TOKEN
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Paciente'
+      summary: List pacientes
+      tags:
+      - CRUD PACIENTES
+    post:
+      consumes:
+      - application/json
+      description: Post a paciente
+      parameters:
+      - description: SECRET_TOKEN
+        in: header
+        name: SECRET_TOKEN
+        required: true
+        type: string
+      - description: Paciente
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/domain.Paciente'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Paciente'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Post a paciente
+      tags:
+      - CRUD PACIENTES
+  /pacientes/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a paciente by ID
+      parameters:
+      - description: SECRET_TOKEN
+        in: header
+        name: SECRET_TOKEN
+        required: true
+        type: string
+      - description: Paciente ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Paciente'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Delete a paciente by ID
+      tags:
+      - CRUD PACIENTES
+    get:
+      consumes:
+      - application/json
+      description: Get a paciente by ID
+      parameters:
+      - description: SECRET_TOKEN
+        in: header
+        name: SECRET_TOKEN
+        required: true
+        type: string
+      - description: Paciente ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Paciente'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Get a paciente by ID
+      tags:
+      - CRUD PACIENTES
+    patch:
+      consumes:
+      - application/json
+      description: Patch a paciente
+      parameters:
+      - description: SECRET_TOKEN
+        in: header
+        name: SECRET_TOKEN
+        required: true
+        type: string
+      - description: Paciente ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Paciente
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/domain.Paciente'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Paciente'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Patch a paciente
+      tags:
+      - CRUD PACIENTES
+    put:
+      consumes:
+      - application/json
+      description: Put a paciente
+      parameters:
+      - description: SECRET_TOKEN
+        in: header
+        name: SECRET_TOKEN
+        required: true
+        type: string
+      - description: Paciente ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Paciente
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/domain.Paciente'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Paciente'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/web.errorResponse'
+      summary: Put a paciente
+      tags:
+      - CRUD PACIENTES
+swagger: "2.0"
