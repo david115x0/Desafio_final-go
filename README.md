@@ -2,6 +2,8 @@
 
 ## David da Silva Sousa
 
+## Patricia Freitas Ruffino
+
 ## packages to install
 
 <pre><code> go get github.com/gin-gonic/gin </code></pre>
